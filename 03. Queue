@@ -1,0 +1,74 @@
+#include <iostream>
+#define MAX_SIZE 15 // ukuran maksimal queue
+
+using namespace std;
+
+class Queue {
+    private:
+        int front; // indeks elemen depan pada queue
+        int rear; // indeks elemen belakang pada queue
+        int arr[MAX_SIZE]; // array untuk menampung elemen-elemen pada queue
+    public:
+        Queue() { // konstruktor
+            front = -1;
+            rear = -1;
+        }
+        
+        bool isFull() { // fungsi untuk memeriksa apakah queue penuh
+            return (rear == MAX_SIZE - 1);
+        }
+        
+        bool isEmpty() { // fungsi untuk memeriksa apakah queue kosong
+            return (front == -1 || front > rear);
+        }
+        
+        void enqueue(int value) { // fungsi untuk menambahkan elemen ke dalam antrian
+            if (isFull()) {
+                cout << "Queue is full!" << endl;
+            }
+            else {
+                if (front == -1) {
+                    front = 0;
+                }
+                rear++;
+                arr[rear] = value;
+                cout << "Enqueued " << value << " into the queue." << endl;
+            }
+        }
+        
+        void dequeue() { // fungsi untuk menghapus elemen dari queue
+            if (isEmpty()) {
+                cout << "Queue is empty!" << endl;
+            }
+            else {
+                cout << "Dequeued " << arr[front] << "." << endl;
+                front++;
+            }
+        }
+        
+        void display() { // fungsi untuk melihat elemen depan pada queue
+            if (isEmpty()) {
+                cout << "Queue kosong!" << endl;
+            }
+            else {
+                cout << "Elements in the queue are: ";
+                for (int i = front; i <= rear; i++) {
+                    cout << arr[i] << " ";
+                }
+                cout << endl;
+            }
+        }
+};
+
+int main() {
+    Queue q;
+    q.enqueue(20);
+    q.enqueue(25);
+    q.enqueue(30);
+    q.enqueue(35);
+    q.enqueue(40);    
+    q.dequeue();
+    q.display();
+    
+    return 0;
+}
